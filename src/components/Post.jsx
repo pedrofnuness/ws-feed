@@ -25,12 +25,16 @@ export function Post() {
       </header>
 
       <div className={styles.content}>
-        <p>Wow, what an awesome app!</p>
-        <p>Looking foward to explore more and share some experience</p>
+        <p>Wow, what an awesome app!
+        Looking foward to explore more and share some experience</p>
 
-        <p>Lets also connect in <a href="https://www.linkedin.com/in/pedrofnuness/">Linkedin</a></p>
+        <p>Lets also connect on <a href="https://www.linkedin.com/in/pedrofnuness/">Linkedin</a></p>
 
-        <p><a href="">#newproject #development #ReactJS</a></p>
+        <p>
+          <a href="">#newproject</a>{' '}
+          <a href="">#development </a>{' '}
+          <a href="">#ReactJS </a>
+        </p>
       </div>
     </article>
   )
