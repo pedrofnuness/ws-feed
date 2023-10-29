@@ -7,7 +7,7 @@ export function Comment() {
     <div className={styles.comment}>
       <Avatar 
         hasBorder={false} 
-        src="https://github.com/yrimaciel.png" 
+        src="https://github.com/o-yurimaciel.png" 
         alt="Comment author avatar" 
       />
 

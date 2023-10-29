@@ -2,6 +2,8 @@ import { Post } from './components/Post'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
 
+import { posts } from './mocks/postsMock'
+
 import './global.css'
 import styles from './App.module.css'
 
@@ -13,14 +15,14 @@ export function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          <Post 
-            author="Pedro Nunes" 
-            content="What an awesome app!!"
-          />
-          <Post 
-            author="Bill Gates"
-            content="We most care for the planet."
-          />
+          {posts.map(post => (
+            <Post 
+              key={post.id}
+              author={post.author}
+              content={post.content}
+              publishedAt={post.publishedAt}
+            />
+          ))}
         </main>
       </div>
     </div>

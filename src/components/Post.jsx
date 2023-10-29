@@ -1,41 +1,43 @@
+import { format, formatDistanceToNow } from 'date-fns'
+
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 import styles from './Post.module.css'
 
-export function Post() {
+export function Post({ author, content, publishedAt }) {
+  const publishedDateFormatted = format(publishedAt, "LLLL do', at' h:mm aaa");
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { addSuffix: true })
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar 
-            src="https://github.com/pedrofnuness.png" 
+            src={author.avatarUrl}
             alt="user avatar" 
           />
           <div className={styles.authorInfo}>
-            <strong>Pedro Nunes</strong>
-            <span>Software Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
         <time 
-          title="October 27th at 3pm"
-          dateTime="2023-10-27 15:00:00"
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}
         >
-          Published 1h ago
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className={styles.content}>
-        <p>Wow, what an awesome app!
-        Looking foward to explore more and share some experience</p>
-
-        <p>Lets also connect on <a href="https://www.linkedin.com/in/pedrofnuness/">Linkedin</a></p>
-
-        <p>
-          <a href="">#newproject</a>{' '}
-          <a href="">#development </a>{' '}
-          <a href="">#ReactJS </a>
-        </p>
+        {content.map((line, index) => {
+          if (line.type === 'paragraph') {
+            return <p key={index}>{line.content}</p>;
+          } else if (line.type === 'link') {
+            return <p key={index}><a href="">{line.content}</a></p>;
+          }
+        })}
       </div>
 
       <form action="" className={styles.commentForm}>
