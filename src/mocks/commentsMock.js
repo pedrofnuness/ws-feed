@@ -1,3 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const commentsMock = [
-  "I like it!! Let's do this"
+  {
+    id: uuidv4(),
+    content: "I like it!! Let's do this"
+  }
 ]

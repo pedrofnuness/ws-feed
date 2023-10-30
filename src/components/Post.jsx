@@ -1,28 +1,33 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { format, formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 
-import { Avatar } from './Avatar'
-import { Comment } from './Comment'
+import { Avatar } from './Avatar';
+import { Comment } from './Comment';
 import { commentsMock } from '../mocks/commentsMock';
-import styles from './Post.module.css'
+import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }) {
   const publishedDateFormatted = format(publishedAt, "LLLL do', at' h:mm aaa");
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { addSuffix: true })
 
   const [comments, setComments] = useState(commentsMock);
-  const [newCommentText, setNewCommentText] = useState('');
+  const [newComment, setNewComment] = useState('');
 
   function handleCreateNewComment() {
     event.preventDefault();
 
-    setComments([...comments, newCommentText]);
-    setNewCommentText('');
+    setComments([...comments, newComment]);
+    setNewComment('');
   }
 
   function handleNewCommentChange() {
-    setNewCommentText(event.target.value);
+    setNewComment({ id: uuidv4(), content:event.target.value });
+  }
+
+  function deleteComment(comment) {
+    
   }
 
   return (
@@ -64,7 +69,7 @@ export function Post({ author, content, publishedAt }) {
           name="comment"
           placeholder="Leave a comment"
           onChange={handleNewCommentChange}
-          value={newCommentText}
+          value={newComment}
         />
 
         <footer>
@@ -73,10 +78,11 @@ export function Post({ author, content, publishedAt }) {
       </form>
 
       <div className={styles.commentList}>
-        {comments.map((comment, index) => (
+        {comments.map(comment => (
           <Comment 
-            key={index}
-            content={comment}
+            key={comment.id}
+            comment={comment}
+            deleteComment={deleteComment}
           />
         ))}
       </div>

@@ -1,6 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
+
 export const posts = [
   {
-    id: 1,
+    id: uuidv4(),
     author: {
       avatarUrl: "https://github.com/pedrofnuness.png",
       name: "Pedro Nunes",
@@ -14,7 +17,7 @@ export const posts = [
     publishedAt: new Date('2023-10-29 19:30:00')
   },
   {
-    id: 2,
+    id: uuidv4(),
     author: {
       avatarUrl: "https://github.com/o-yurimaciel.png",
       name: "Yuri Maciel",
@@ -27,7 +30,7 @@ export const posts = [
     publishedAt: new Date('2023-10-29 19:30:00')
   },
   {
-    id: 3,
+    id: uuidv4(),
     author: {
       avatarUrl: "https://github.com/Patrickdevbjj.png",
       name: "Patrick Rodrigues",
