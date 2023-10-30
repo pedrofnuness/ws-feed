@@ -13,21 +13,23 @@ export function Post({ author, content, publishedAt }) {
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { addSuffix: true })
 
   const [comments, setComments] = useState(commentsMock);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState({id: null, content: ''});
 
   function handleCreateNewComment() {
     event.preventDefault();
 
     setComments([...comments, newComment]);
-    setNewComment('');
+    setNewComment({ id: null, content: '' });
   }
 
   function handleNewCommentChange() {
     setNewComment({ id: uuidv4(), content:event.target.value });
   }
 
-  function deleteComment(comment) {
-    
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDeletedOne = comments.filter(comment => comment.id !== commentToDelete.id)
+
+    setComments(commentsWithoutDeletedOne);
   }
 
   return (
@@ -69,7 +71,7 @@ export function Post({ author, content, publishedAt }) {
           name="comment"
           placeholder="Leave a comment"
           onChange={handleNewCommentChange}
-          value={newComment}
+          value={newComment.content}
         />
 
         <footer>
@@ -82,7 +84,7 @@ export function Post({ author, content, publishedAt }) {
           <Comment 
             key={comment.id}
             comment={comment}
-            deleteComment={deleteComment}
+            onDeleteComment={deleteComment}
           />
         ))}
       </div>
