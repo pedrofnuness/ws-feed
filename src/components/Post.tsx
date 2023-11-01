@@ -1,32 +1,32 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import { commentsMock } from '../mocks/commentsMock';
+import { CommentInterface, PostProps } from '../types';
 import styles from './Post.module.css';
 
-export function Post({ author, content, publishedAt }) {
+export function Post({ author, content, publishedAt }: PostProps) {
   const publishedDateFormatted = format(publishedAt, "LLLL do', at' h:mm aaa");
   const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, { addSuffix: true })
 
   const [comments, setComments] = useState(commentsMock);
-  const [newComment, setNewComment] = useState({id: null, content: ''});
+  const [newComment, setNewComment] = useState({id: '', content: ''});
 
-  function handleCreateNewComment() {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
 
     setComments([...comments, newComment]);
-    setNewComment({ id: null, content: '' });
+    setNewComment({ id: '', content: '' });
   }
 
-  function handleNewCommentChange() {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setNewComment({ id: uuidv4(), content:event.target.value });
   }
 
-  function deleteComment(commentToDelete) {
+  function deleteComment(commentToDelete: CommentInterface) {
     const commentsWithoutDeletedOne = comments.filter(comment => comment.id !== commentToDelete.id)
 
     setComments(commentsWithoutDeletedOne);

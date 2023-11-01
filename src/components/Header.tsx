@@ -1,6 +1,6 @@
 import styles from './Header.module.css'
 
-import hatLogo from '../assets/hat-logo.svg'
+import hatLogo from '/hat-logo.svg'
 
 export function Header() {
   return (
