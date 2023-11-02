@@ -2,10 +2,10 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Avatar } from './Avatar';
-import { Comment } from './Comment';
-import { commentsMock } from '../mocks/commentsMock';
-import { CommentInterface, PostProps } from '../types';
+import { Avatar } from '../Avatar/Avatar';
+import { Comment } from '../Comment/Comment';
+import { commentsMock } from '../../mocks/commentsMock';
+import { CommentInterface, PostProps } from '../../types';
 import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }: PostProps) {

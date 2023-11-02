@@ -1,8 +1,8 @@
 import { ThumbsUp, Trash } from 'phosphor-react'
 import styles from './Comment.module.css'
-import { Avatar } from './Avatar'
+import { Avatar } from '../Avatar/Avatar'
 import { useState } from 'react'
-import { CommentInterface } from '../types'
+import { CommentInterface } from '../../types'
 
 type CommentComponentProps = {
   comment: CommentInterface;
